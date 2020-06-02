@@ -271,11 +271,19 @@
 ; fix this as it is not general
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/mode")
-(load "groovy-mode.el")
-(require 'groovy-mode)
-(add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
-(add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
+(if (file-directory-p "~/.emacs.d/mode")
+    ((add-to-list 'load-path "~/.emacs.d/mode")
+     (if (file-exist-p "~/.emacs.d/mode/groovy-mode.el")
+         ((add-to-list 'load-path "~/.emacs.d/mode")
+          (load "groovy-mode.el")
+          (require 'groovy-mode)
+          (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
+          (add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
+          )
+       )
+     )
+  )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -289,7 +297,10 @@
 ; set up the emacs as a server
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq server-name (getenv "VIRTDESCTOP"))
+(setq server-name
+      (if (getenv "VIRTDESCTOP")
+          (getenv "VIRTDESCTOP")
+        "my-e-server"))
 (server-start)
 ; as I use multipple emacses for different virtual desctops I need to setup a
 ; environment variabel describing which setup I am on
