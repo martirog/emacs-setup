@@ -46,7 +46,6 @@
 (scroll-bar-mode -1) ;
 ;;show trailing whitespaces
 (setq-default show-trailing-whitespace t)
-
 ; Indicate empty lines at the end of the buffer
 (setq-default indicate-empty-lines t)
 
@@ -57,6 +56,8 @@
 ; turn truncation off
 (setq-default truncate-lines t)
 
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -88,7 +89,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-set-key (quote [?\C-c ?f]) (quote grep-find) )
-
+; move to the grep buffer after run
+(add-hook 'grep-mode-hook
+          '(lambda ()
+             (switch-to-buffer-other-window "*grep*")))
+(global-set-key (quote [?\C-c ?o]) (quote find-file-at-point) )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
