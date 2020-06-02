@@ -271,18 +271,16 @@
 ; fix this as it is not general
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(if (file-directory-p "~/.emacs.d/mode")
-    ((add-to-list 'load-path "~/.emacs.d/mode")
-     (if (file-exist-p "~/.emacs.d/mode/groovy-mode.el")
-         ((add-to-list 'load-path "~/.emacs.d/mode")
-          (load "groovy-mode.el")
-          (require 'groovy-mode)
-          (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
-          (add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
-          )
-       )
-     )
-  )
+(when (file-directory-p "~/.emacs.d/mode")
+    (add-to-list 'load-path "~/.emacs.d/mode")
+    (when (file-exists-p "~/.emacs.d/mode/groovy-mode.el")
+      (add-to-list 'load-path "~/.emacs.d/mode")
+      (load "groovy-mode.el")
+      (require 'groovy-mode)
+      (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
+      (add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
+      )
+    )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
