@@ -221,6 +221,27 @@
       verilog-tab-always-indent t
       verilog-tab-to-comment nil)
 
+(defalias 'my-expand-abbrev (make-hippie-expand-function
+                             '(try-expand-dabbrev
+                               try-expand-dabbrev-visible
+                               try-expand-dabbrev-all-buffers)))
+
+(defun my-verilog-tab ()
+  (interactive)
+  (let ((boi-point
+           (save-excursion
+             (back-to-indentation)
+             (point))))
+    (electric-verilog-tab)
+    (if (and
+         (save-excursion
+          (back-to-indentation)
+          (= (point) boi-point))
+         (looking-at "\\>"))
+        (my-expand-abbrev 1))))
+
+(define-key verilog-mode-map [remap electric-verilog-tab] 'my-verilog-tab)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; activate ido.
