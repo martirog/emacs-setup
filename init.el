@@ -186,26 +186,7 @@
 ; load verilog mode when .v .dv or .sv
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defconst my-verilog-beg-block-re-ordered
-  ( concat "\\(\\<begin\\>\\)"		;1
-	   "\\|\\(\\<randcase\\>\\|\\(\\<unique0?\\s-+\\|priority\\s-+\\)?case[xz]?\\>\\)" ; 2,3
-	   "\\|\\(\\(\\<disable\\>\\s-+\\|\\<wait\\>\\s-+\\)?fork\\>\\)" ;4,5
-	   "\\|\\(\\<class\\>\\)"		;6
-	   "\\|\\(\\<table\\>\\)"		;7
-	   "\\|\\(\\<specify\\>\\)"		;8
-	   "\\|\\(\\<function\\>\\)"		;9
-           "\\|\\(\\(?:\\<\\(?:virtual\\|protected\\|static\\)\\>\\s-+\\)*\\<function\\>\\)"  ;10
-           "\\|\\(\\<task\\>\\)"                ;11
-           "\\|\\(\\(?:\\<\\(?:virtual\\|protected\\|static\\)\\>\\s-+\\)*\\<task\\>\\)"      ;12
-           "\\|\\(\\<generate\\>\\)"            ;13
-           "\\|\\(\\<covergroup\\>\\)"          ;14
-           "\\|\\(\\(?:\\(?:\\<cover\\>\\s-+\\)\\|\\(?:\\<assert\\>\\s-+\\)\\)*\\<property\\>\\)" ;15
-           "\\|\\(\\<\\(?:rand\\)?sequence\\>\\)" ;16
-           "\\|\\(\\<clocking\\>\\)"              ;17
-           "\\|\\(\\<`[ou]vm_[a-z_]+_begin\\>\\)" ;18
-           "\\|\\(\\<`vmm_[a-z_]+_member_begin\\>\\)"
-	   ;;
-))
+(require 'verilog-mode)
 ;; Load verilog mode only when needed
 (autoload 'verilog-mode "verilog-mode" "Verilog mode" t )
 ;; Any files that end in .v, .dv or .sv should be in verilog mode
@@ -213,7 +194,7 @@
 ;; Any files in verilog mode should have their keywords colorized
 (add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
 (add-hook 'verilog-mode-hook 'hs-minor-mode)
-(add-to-list 'hs-special-modes-alist (list 'verilog-mode (list my-verilog-beg-block-re-ordered 0) "\\<end\\>" nil 'verilog-forward-sexp-function))
+(add-to-list 'hs-special-modes-alist (list 'verilog-mode (list verilog-beg-block-re-ordered 0) "\\<end\\>" nil 'verilog-forward-sexp-function))
 (global-set-key (kbd "C-c a") 'hs-toggle-hiding)
 
 ;; Set indent
