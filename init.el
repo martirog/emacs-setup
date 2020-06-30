@@ -221,10 +221,43 @@
       verilog-tab-always-indent t
       verilog-tab-to-comment nil)
 
+; copied from https://www.emacswiki.org/emacs/HippieExpand
+(defun he-tag-beg ()
+  (let ((p
+         (save-excursion
+           (backward-word 1)
+           (point))))
+    p))
+
+(defun tags-complete-tag (string predicate what)
+  (save-excursion
+    (if (fboundp 'tags-completion-table)
+     (if (eq what t)
+         (all-completions string (tags-completion-table) predicate)
+       (try-completion string (tags-completion-table) predicate))
+     nil)))
+
+(defun try-expand-tag (old)
+  (unless  old
+    (he-init-string (he-tag-beg) (point))
+    (setq tags-he-expand-list (sort
+                          (all-completions he-search-string 'tags-complete-tag) 'string-lessp)))
+  (while (and tags-he-expand-list
+              (he-string-member (car tags-he-expand-list) he-tried-table))
+    (setq tags-he-expand-list (cdr tags-he-expand-list)))
+  (if (null tags-he-expand-list)
+      (progn
+        (when old (he-reset-string))
+        ())
+    (he-substitute-string (car tags-he-expand-list))
+    (setq tags-he-expand-list (cdr tags-he-expand-list))
+    t))
+
+
 (defalias 'my-expand-abbrev (make-hippie-expand-function
                              '(try-expand-dabbrev
                                try-expand-dabbrev-visible
-                               try-expand-dabbrev-all-buffers)))
+                               try-expand-tag)))
 
 (defun my-verilog-tab ()
   (interactive)
@@ -238,7 +271,7 @@
           (back-to-indentation)
           (= (point) boi-point))
          (looking-at "\\>"))
-        (my-expand-abbrev 1))))
+        (my-expand-abbrev nil))))
 
 (define-key verilog-mode-map [remap electric-verilog-tab] 'my-verilog-tab)
 
