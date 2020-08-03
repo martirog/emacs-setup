@@ -1,4 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; set colors
 
@@ -193,9 +193,9 @@
 (add-to-list 'auto-mode-alist '("\\.[ds]?v\\'" . verilog-mode))
 ;; Any files in verilog mode should have their keywords colorized
 (add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
-(add-hook 'verilog-mode-hook 'hs-minor-mode)
-(add-to-list 'hs-special-modes-alist (list 'verilog-mode (list verilog-beg-block-re-ordered 0) "\\<end\\>" nil 'verilog-forward-sexp-function))
-(global-set-key (kbd "C-c a") 'hs-toggle-hiding)
+;(add-hook 'verilog-mode-hook 'hs-minor-mode)
+;(add-to-list 'hs-special-modes-alist (list 'verilog-mode (list verilog-beg-block-re-ordered 0) "\\<end\\>" nil 'verilog-forward-sexp-function))
+;(global-set-key (kbd "C-c a") 'hs-toggle-hiding)
 
 ;; Set indent
 ;;(setq verilog-indent-level 2)
@@ -221,59 +221,13 @@
       verilog-tab-always-indent t
       verilog-tab-to-comment nil)
 
-; copied from https://www.emacswiki.org/emacs/HippieExpand
-(defun he-tag-beg ()
-  (let ((p
-         (save-excursion
-           (backward-word 1)
-           (point))))
-    p))
-
-(defun tags-complete-tag (string predicate what)
-  (save-excursion
-    (if (fboundp 'tags-completion-table)
-     (if (eq what t)
-         (all-completions string (tags-completion-table) predicate)
-       (try-completion string (tags-completion-table) predicate))
-     nil)))
-
-(defun try-expand-tag (old)
-  (unless  old
-    (he-init-string (he-tag-beg) (point))
-    (setq tags-he-expand-list (sort
-                          (all-completions he-search-string 'tags-complete-tag) 'string-lessp)))
-  (while (and tags-he-expand-list
-              (he-string-member (car tags-he-expand-list) he-tried-table))
-    (setq tags-he-expand-list (cdr tags-he-expand-list)))
-  (if (null tags-he-expand-list)
-      (progn
-        (when old (he-reset-string))
-        ())
-    (he-substitute-string (car tags-he-expand-list))
-    (setq tags-he-expand-list (cdr tags-he-expand-list))
-    t))
-
-
-(defalias 'my-expand-abbrev (make-hippie-expand-function
-                             '(try-expand-dabbrev
-                               try-expand-dabbrev-visible
-                               try-expand-tag)))
-
-(defun my-verilog-tab ()
-  (interactive)
-  (let ((boi-point
-           (save-excursion
-             (back-to-indentation)
-             (point))))
-    (electric-verilog-tab)
-    (if (and
-         (save-excursion
-          (back-to-indentation)
-          (= (point) boi-point))
-         (looking-at "\\>"))
-        (my-expand-abbrev nil))))
-
-(define-key verilog-mode-map [remap electric-verilog-tab] 'my-verilog-tab)
+(when (file-directory-p "~/.emacs.d/mode/verilog-minor-mode")
+  (add-to-list 'load-path "~/.emacs.d/mode/verilog-minor-mode")
+  ;(autoload 'verilog-minor-mode "verilog-minor-mode" "Verilog minor mode" t )
+  (require 'verilog-minor-mode)
+  ; add the paths to your repos here
+  ;(add-to-list 'vminor-path-to-repos '("/home/martin/github/uvm" . nil))
+  (add-hook 'verilog-mode-hook 'verilog-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -315,7 +269,6 @@
 (when (file-directory-p "~/.emacs.d/mode")
     (add-to-list 'load-path "~/.emacs.d/mode")
     (when (file-exists-p "~/.emacs.d/mode/groovy-mode.el")
-      (add-to-list 'load-path "~/.emacs.d/mode")
       (load "groovy-mode.el")
       (require 'groovy-mode)
       (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
