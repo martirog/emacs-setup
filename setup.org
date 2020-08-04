@@ -27,44 +27,53 @@ TODO: check this one out
 (setq x-pointer-background-color "blue")         ; This is color you really
                                                  ; want ptr/crsr
 #+END_SRC
-** modeline
+* emacs gui settings
+** buffer name in titel bar
+#+BEGIN_SRC emacs-lisp
+;; Format the title-bar to always include the buffer name
+(setq frame-title-format "emacs - %b")
+#+END_SRC
+** remove startup screens
+#+BEGIN_SRC emacs-lisp
+;; disable welcome message
+(setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message t)
+(setq initial-scratch-message nil)
+#+END_SRC
+** remove tool/menu/scroll bar
+#+BEGIN_SRC emacs-lisp
+;;remove toolbar
+(tool-bar-mode -1)
+(menu-bar-mode -1)   ; turn off menu bar, not sure you want this?
+(scroll-bar-mode -1) ;
+#+END_SRC
+** whitespace setup
+#+BEGIN_SRC emacs-lisp
+;;show trailing whitespaces
+(setq-default show-trailing-whitespace t)
+; Indicate empty lines at the end of the buffer
+(setq-default indicate-empty-lines t)
+#+END_SRC
+** dont wrap lines
+#+BEGIN_SRC emacs-lisp
+; turn truncation on
+(setq-default truncate-lines t)
+#+END_SRC
+** enable window moving with shift-arrow
+#+BEGIN_SRC emacs-lisp
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+#+END_SRC
+
+* mode line
+** default colors
 #+BEGIN_SRC emacs-lisp
 (set-face-background 'mode-line "#404040")
 (set-face-foreground  'mode-line "#FDCE81")
 (set-face-background 'mode-line-inactive "#202020")
 (set-face-foreground  'mode-line-inactive "#f0f0f0")
 #+END_SRC
-
-* emacs gui settings
-#+BEGIN_SRC emacs-lisp
-;; Format the title-bar to always include the buffer name
-(setq frame-title-format "emacs - %b")
-
-;; disable welcome message
-(setq inhibit-startup-message t)
-(setq inhibit-startup-echo-area-message t)
-(setq initial-scratch-message nil)
-;;remove toolbar
-(tool-bar-mode -1)
-(menu-bar-mode -1)   ; turn off menu bar, not sure you want this?
-(scroll-bar-mode -1) ;
-;;show trailing whitespaces
-(setq-default show-trailing-whitespace t)
-; Indicate empty lines at the end of the buffer
-(setq-default indicate-empty-lines t)
-
-; set scrollbar (not uised as scroll bar is turned off)
-;(require 'pixel-scroll)
-;(pixel-scroll-mode 1)
-
-; turn truncation off
-(setq-default truncate-lines t)
-
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-#+END_SRC
-
-* mode line formatting
+** layout with costum colors
 #+BEGIN_SRC emacs-lisp
 (setq-default mode-line-format
               (list
@@ -87,18 +96,28 @@ TODO: check this one out
 #+END_SRC
 
 * global key mods
+** grep find
 #+BEGIN_SRC emacs-lisp
 (global-set-key (quote [?\C-c ?f]) (quote grep-find) )
 ; move to the grep buffer after run
 (add-hook 'grep-mode-hook
           '(lambda ()
              (switch-to-buffer-other-window "*grep*")))
+#+END_SRC
+** open file at point
+#+BEGIN_SRC emacs-lisp
 (global-set-key (quote [?\C-c ?o]) (quote find-file-at-point) )
+#+END_SRC
+** show occurenses in search
+#+BEGIN_SRC emacs-lisp
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o")
   (lambda () (interactive)
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
+#+END_SRC
+** quick calkulator
+#+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-c +") 'quick-calc)
 #+END_SRC
 
@@ -178,6 +197,7 @@ TODO: check this one out
 #+END_SRC
 
 * verilog
+** load verilog mode
 #+BEGIN_SRC emacs-lisp
 (require 'verilog-mode)
 ;; Load verilog mode only when needed
@@ -186,10 +206,9 @@ TODO: check this one out
 (add-to-list 'auto-mode-alist '("\\.[ds]?v\\'" . verilog-mode))
 ;; Any files in verilog mode should have their keywords colorized
 (add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
-;(add-hook 'verilog-mode-hook 'hs-minor-mode)
-;(add-to-list 'hs-special-modes-alist (list 'verilog-mode (list verilog-beg-block-re-ordered 0) "\\<end\\>" nil 'verilog-forward-sexp-function))
-;(global-set-key (kbd "C-c a") 'hs-toggle-hiding)
-
+#+END_SRC
+** indent setup
+#+BEGIN_SRC emacs-lisp
 ;; Set indent
 ;;(setq verilog-indent-level 2)
 (defvar gc/verilog-indent-level 2)
@@ -200,6 +219,9 @@ TODO: check this one out
       verilog-indent-level-directive gc/verilog-indent-level
       verilog-case-indent gc/verilog-indent-level
       verilog-cexp-indent gc/verilog-indent-level)
+#+END_SRC
+** defaults
+#+BEGIN_SRC emacs-lisp
 
 (setq verilog-align-ifelse t
       verilog-auto-endcomments t
@@ -213,7 +235,9 @@ TODO: check this one out
       verilog-minimum-comment-distance 20
       verilog-tab-always-indent t
       verilog-tab-to-comment nil)
-
+#+END_SRC
+** verilog minor mode
+#+BEGIN_SRC emacs-lisp
 (when (file-directory-p "~/.emacs.d/mode/verilog-minor-mode")
   (add-to-list 'load-path "~/.emacs.d/mode/verilog-minor-mode")
   ;(autoload 'verilog-minor-mode "verilog-minor-mode" "Verilog minor mode" t )
