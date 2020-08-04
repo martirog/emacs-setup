@@ -1,23 +1,31 @@
 * setup colors
 ** frame background
+
 #+BEGIN_SRC emacs-lisp
 (set-face-background 'default "black")
 #+END_SRC
+
 ** normal text
+
 #+BEGIN_SRC emacs-lisp
 (set-face-foreground 'default "bisque")
 #+END_SRC
+
 ** cursor color
+
 #+BEGIN_SRC emacs-lisp
 (set-cursor-color "bisque") ; did not need this before 23.1?
 #+END_SRC
+
 ** higlights
+
 #+BEGIN_SRC emacs-lisp
 (set-face-background 'highlight "blue")
 (set-face-foreground 'highlight "yellow")
 (set-face-background 'isearch "yellow")
 (set-face-foreground 'isearch "red")
 #+END_SRC
+
 ** xpointer
 TODO: check this one out
 
@@ -27,39 +35,51 @@ TODO: check this one out
 (setq x-pointer-background-color "blue")         ; This is color you really
                                                  ; want ptr/crsr
 #+END_SRC
+
 * emacs gui settings
 ** buffer name in titel bar
+
 #+BEGIN_SRC emacs-lisp
 ;; Format the title-bar to always include the buffer name
 (setq frame-title-format "emacs - %b")
 #+END_SRC
+
 ** remove startup screens
+
 #+BEGIN_SRC emacs-lisp
 ;; disable welcome message
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
 (setq initial-scratch-message nil)
 #+END_SRC
+
 ** remove tool/menu/scroll bar
+
 #+BEGIN_SRC emacs-lisp
 ;;remove toolbar
 (tool-bar-mode -1)
 (menu-bar-mode -1)   ; turn off menu bar, not sure you want this?
 (scroll-bar-mode -1) ;
 #+END_SRC
+
 ** whitespace setup
+
 #+BEGIN_SRC emacs-lisp
 ;;show trailing whitespaces
 (setq-default show-trailing-whitespace t)
 ; Indicate empty lines at the end of the buffer
 (setq-default indicate-empty-lines t)
 #+END_SRC
+
 ** dont wrap lines
+
 #+BEGIN_SRC emacs-lisp
 ; turn truncation on
 (setq-default truncate-lines t)
 #+END_SRC
+
 ** enable window moving with shift-arrow
+
 #+BEGIN_SRC emacs-lisp
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
@@ -67,13 +87,16 @@ TODO: check this one out
 
 * mode line
 ** default colors
+
 #+BEGIN_SRC emacs-lisp
 (set-face-background 'mode-line "#404040")
 (set-face-foreground  'mode-line "#FDCE81")
 (set-face-background 'mode-line-inactive "#202020")
 (set-face-foreground  'mode-line-inactive "#f0f0f0")
 #+END_SRC
+
 ** layout with costum colors
+
 #+BEGIN_SRC emacs-lisp
 (setq-default mode-line-format
               (list
@@ -97,6 +120,7 @@ TODO: check this one out
 
 * global key mods
 ** grep find
+
 #+BEGIN_SRC emacs-lisp
 (global-set-key (quote [?\C-c ?f]) (quote grep-find) )
 ; move to the grep buffer after run
@@ -104,11 +128,15 @@ TODO: check this one out
           '(lambda ()
              (switch-to-buffer-other-window "*grep*")))
 #+END_SRC
+
 ** open file at point
+
 #+BEGIN_SRC emacs-lisp
 (global-set-key (quote [?\C-c ?o]) (quote find-file-at-point) )
 #+END_SRC
+
 ** show occurenses in search
+
 #+BEGIN_SRC emacs-lisp
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o")
@@ -116,12 +144,15 @@ TODO: check this one out
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 #+END_SRC
+
 ** quick calkulator
+
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-c +") 'quick-calc)
 #+END_SRC
 
 * cc-mode
+
 #+BEGIN_SRC emacs-lisp
 ;; set c-mode-hook function to override default behavior of various items
 
@@ -167,6 +198,7 @@ TODO: check this one out
 #+END_SRC
 
 * toggle between horizontal and vertical window split
+
 #+BEGIN_SRC emacs-lisp
 (defun toggle-window-split ()
   (interactive)
@@ -198,6 +230,7 @@ TODO: check this one out
 
 * verilog
 ** load verilog mode
+
 #+BEGIN_SRC emacs-lisp
 (require 'verilog-mode)
 ;; Load verilog mode only when needed
@@ -207,7 +240,9 @@ TODO: check this one out
 ;; Any files in verilog mode should have their keywords colorized
 (add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
 #+END_SRC
+
 ** indent setup
+
 #+BEGIN_SRC emacs-lisp
 ;; Set indent
 ;;(setq verilog-indent-level 2)
@@ -220,7 +255,9 @@ TODO: check this one out
       verilog-case-indent gc/verilog-indent-level
       verilog-cexp-indent gc/verilog-indent-level)
 #+END_SRC
+
 ** defaults
+
 #+BEGIN_SRC emacs-lisp
 
 (setq verilog-align-ifelse t
@@ -236,7 +273,9 @@ TODO: check this one out
       verilog-tab-always-indent t
       verilog-tab-to-comment nil)
 #+END_SRC
+
 ** verilog minor mode
+
 #+BEGIN_SRC emacs-lisp
 (when (file-directory-p "~/.emacs.d/mode/verilog-minor-mode")
   (add-to-list 'load-path "~/.emacs.d/mode/verilog-minor-mode")
@@ -248,6 +287,7 @@ TODO: check this one out
 #+END_SRC
 
 * ido
+
 #+BEGIN_SRC emacs-lisp
 (require 'ido)
 (ido-mode t)
@@ -255,6 +295,7 @@ TODO: check this one out
 #+END_SRC
 
 * erc
+
 #+BEGIN_SRC emacs-lisp
 (defun rgr/ido-erc-buffer()
   (interactive)
@@ -274,6 +315,7 @@ TODO: check this one out
 #+END_SRC
 
 * groovy
+
 #+BEGIN_SRC emacs-lisp
 (when (file-directory-p "~/.emacs.d/mode")
     (add-to-list 'load-path "~/.emacs.d/mode")
@@ -287,11 +329,13 @@ TODO: check this one out
 #+END_SRC
 
 * fucking mac shit
+
 #+BEGIN_SRC emacs-lisp
 (setq x-super-keysym 'meta)
 #+END_SRC
 
 * emacs server
+
 #+BEGIN_SRC emacs-lisp
 (setq server-name
       (if (getenv "VIRTDESCTOP")
@@ -303,6 +347,7 @@ TODO: check this one out
 #+END_SRC
 
 * tramp
+
 #+BEGIN_SRC emacs-lisp
 (setq tramp-default-method "ssh")
 (defun ido-remove-tramp-from-cache nil
@@ -322,6 +367,7 @@ TODO: check this one out
 #+END_SRC
 
 * python
+
 #+BEGIN_SRC emacs-lisp
 (setq python-shell-interpreter "python3")
 #+END_SRC
