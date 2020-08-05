@@ -1,3 +1,6 @@
+use "C-c '" to edit code blocks
+
+
 * setup colors
 ** frame background
 
