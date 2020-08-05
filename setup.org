@@ -2,372 +2,372 @@
 ** frame background
 
 #+BEGIN_SRC emacs-lisp
-(set-face-background 'default "black")
+  (set-face-background 'default "black")
 #+END_SRC
 
 ** normal text
 
 #+BEGIN_SRC emacs-lisp
-(set-face-foreground 'default "bisque")
+  (set-face-foreground 'default "bisque")
 #+END_SRC
 
 ** cursor color
 
 #+BEGIN_SRC emacs-lisp
-(set-cursor-color "bisque") ; did not need this before 23.1?
+  (set-cursor-color "bisque") ; did not need this before 23.1?
 #+END_SRC
 
 ** higlights
 
 #+BEGIN_SRC emacs-lisp
-(set-face-background 'highlight "blue")
-(set-face-foreground 'highlight "yellow")
-(set-face-background 'isearch "yellow")
-(set-face-foreground 'isearch "red")
+  (set-face-background 'highlight "blue")
+  (set-face-foreground 'highlight "yellow")
+  (set-face-background 'isearch "yellow")
+  (set-face-foreground 'isearch "red")
 #+END_SRC
 
 ** xpointer
 TODO: check this one out
 
 #+BEGIN_SRC emacs-lisp
-(setq x-pointer-foreground-color "black")        ; Adds to bg color,
-                                                 ; so keep black
-(setq x-pointer-background-color "blue")         ; This is color you really
-                                                 ; want ptr/crsr
+  (setq x-pointer-foreground-color "black")        ; Adds to bg color,
+                                                   ; so keep black
+  (setq x-pointer-background-color "blue")         ; This is color you really
+                                                   ; want ptr/crsr
 #+END_SRC
 
 * emacs gui settings
 ** buffer name in titel bar
 
 #+BEGIN_SRC emacs-lisp
-;; Format the title-bar to always include the buffer name
-(setq frame-title-format "emacs - %b")
+  ;; Format the title-bar to always include the buffer name
+  (setq frame-title-format "emacs - %b")
 #+END_SRC
 
 ** remove startup screens
 
 #+BEGIN_SRC emacs-lisp
-;; disable welcome message
-(setq inhibit-startup-message t)
-(setq inhibit-startup-echo-area-message t)
-(setq initial-scratch-message nil)
+  ;; disable welcome message
+  (setq inhibit-startup-message t)
+  (setq inhibit-startup-echo-area-message t)
+  (setq initial-scratch-message nil)
 #+END_SRC
 
 ** remove tool/menu/scroll bar
 
 #+BEGIN_SRC emacs-lisp
-;;remove toolbar
-(tool-bar-mode -1)
-(menu-bar-mode -1)   ; turn off menu bar, not sure you want this?
-(scroll-bar-mode -1) ;
+  ;;remove toolbar
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)   ; turn off menu bar, not sure you want this?
+  (scroll-bar-mode -1) ;
 #+END_SRC
 
 ** whitespace setup
 
 #+BEGIN_SRC emacs-lisp
-;;show trailing whitespaces
-(setq-default show-trailing-whitespace t)
-; Indicate empty lines at the end of the buffer
-(setq-default indicate-empty-lines t)
+  ;;show trailing whitespaces
+  (setq-default show-trailing-whitespace t)
+  ; Indicate empty lines at the end of the buffer
+  (setq-default indicate-empty-lines t)
 #+END_SRC
 
 ** dont wrap lines
 
 #+BEGIN_SRC emacs-lisp
-; turn truncation on
-(setq-default truncate-lines t)
+  ; turn truncation on
+  (setq-default truncate-lines t)
 #+END_SRC
 
 ** enable window moving with shift-arrow
 
 #+BEGIN_SRC emacs-lisp
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
+  (when (fboundp 'windmove-default-keybindings)
+    (windmove-default-keybindings))
 #+END_SRC
 
 * mode line
 ** default colors
 
 #+BEGIN_SRC emacs-lisp
-(set-face-background 'mode-line "#404040")
-(set-face-foreground  'mode-line "#FDCE81")
-(set-face-background 'mode-line-inactive "#202020")
-(set-face-foreground  'mode-line-inactive "#f0f0f0")
+  (set-face-background 'mode-line "#404040")
+  (set-face-foreground  'mode-line "#FDCE81")
+  (set-face-background 'mode-line-inactive "#202020")
+  (set-face-foreground  'mode-line-inactive "#f0f0f0")
 #+END_SRC
 
 ** layout with costum colors
 
 #+BEGIN_SRC emacs-lisp
-(setq-default mode-line-format
-              (list
-               "%e"
-               'mode-line-front-space
-               '(:propertize mode-line-mule-info face (:foreground "green"))
-               '(:propertize mode-line-client   face (:foreground "green"))
-               '(:propertize mode-line-modified face (:foreground "green"))
-               '(:propertize mode-line-remote   face (:foreground "green"))
-               '(:propertize mode-line-frame-identification face (:foreground "#CF70F7"))
-               'mode-line-buffer-identification
-               "   "
-               '(:propertize mode-line-position face (:foreground "#2EB604"))
-               '(vc-mode vc-mode)
-               "  "
-               '(:propertize mode-line-modes face (:foreground "#CF70F7"))
-               '(:propertize mode-line-misc-info face (:foreground "#CC92E0"))
-               'mode-line-end-spaces
-               ))
+  (setq-default mode-line-format
+                (list
+                 "%e"
+                 'mode-line-front-space
+                 '(:propertize mode-line-mule-info face (:foreground "green"))
+                 '(:propertize mode-line-client   face (:foreground "green"))
+                 '(:propertize mode-line-modified face (:foreground "green"))
+                 '(:propertize mode-line-remote   face (:foreground "green"))
+                 '(:propertize mode-line-frame-identification face (:foreground "#CF70F7"))
+                 'mode-line-buffer-identification
+                 "   "
+                 '(:propertize mode-line-position face (:foreground "#2EB604"))
+                 '(vc-mode vc-mode)
+                 "  "
+                 '(:propertize mode-line-modes face (:foreground "#CF70F7"))
+                 '(:propertize mode-line-misc-info face (:foreground "#CC92E0"))
+                 'mode-line-end-spaces
+                 ))
 #+END_SRC
 
 * global key mods
 ** grep find
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (quote [?\C-c ?f]) (quote grep-find) )
-; move to the grep buffer after run
-(add-hook 'grep-mode-hook
-          '(lambda ()
-             (switch-to-buffer-other-window "*grep*")))
+  (global-set-key (quote [?\C-c ?f]) (quote grep-find) )
+  ; move to the grep buffer after run
+  (add-hook 'grep-mode-hook
+            '(lambda ()
+               (switch-to-buffer-other-window "*grep*")))
 #+END_SRC
 
 ** open file at point
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (quote [?\C-c ?o]) (quote find-file-at-point) )
+  (global-set-key (quote [?\C-c ?o]) (quote find-file-at-point) )
 #+END_SRC
 
 ** show occurenses in search
 
 #+BEGIN_SRC emacs-lisp
-;; Activate occur easily inside isearch
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda () (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
+  ;; Activate occur easily inside isearch
+  (define-key isearch-mode-map (kbd "C-o")
+    (lambda () (interactive)
+      (let ((case-fold-search isearch-case-fold-search))
+        (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 #+END_SRC
 
 ** quick calkulator
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-c +") 'quick-calc)
+  (global-set-key (kbd "C-c +") 'quick-calc)
 #+END_SRC
 
 * cc-mode
 
 #+BEGIN_SRC emacs-lisp
-;; set c-mode-hook function to override default behavior of various items
+  ;; set c-mode-hook function to override default behavior of various items
 
-(setq tab-width 4);; vc++ default
-(setq-default c-basic-offset 4) ;; 2 is default
-(setq-default indent-tabs-mode nil);; indent with spaces
-(c-set-offset 'case-label '+)
-(c-set-offset 'inline-open '0)
-(c-set-offset 'arglist-close '0)
+  (setq tab-width 4);; vc++ default
+  (setq-default c-basic-offset 4) ;; 2 is default
+  (setq-default indent-tabs-mode nil);; indent with spaces
+  (c-set-offset 'case-label '+)
+  (c-set-offset 'inline-open '0)
+  (c-set-offset 'arglist-close '0)
 
-(require 'cc-mode)
+  (require 'cc-mode)
 
-(defconst my-ttc-style '((c-basic-offset . 4)
-                         (c-comment-only-line-offset 0 . 0)
-                     (c-offsets-alist
-                          (statement-block-intro . +)
-                    (knr-argdecl-intro . 5)
-                    (substatement-open . 0)
-                    (label . 0)
-                    (statement-case-open . +)
-                          (statement-case-intro . +)
-                    (statement-cont . +)
-                    (arglist-intro . c-lineup-arglist-intro-after-paren)
-                    (arglist-close . c-lineup-arglist)
-                    (inline-open . 0))
-                         (c-special-indent-hook . c-gnu-impose-minimum)
-                         (c-comment-continuation-stars . "")
-                         (c-hanging-comment-ender-p . t)))
+  (defconst my-ttc-style '((c-basic-offset . 4)
+                           (c-comment-only-line-offset 0 . 0)
+                       (c-offsets-alist
+                            (statement-block-intro . +)
+                      (knr-argdecl-intro . 5)
+                      (substatement-open . 0)
+                      (label . 0)
+                      (statement-case-open . +)
+                            (statement-case-intro . +)
+                      (statement-cont . +)
+                      (arglist-intro . c-lineup-arglist-intro-after-paren)
+                      (arglist-close . c-lineup-arglist)
+                      (inline-open . 0))
+                           (c-special-indent-hook . c-gnu-impose-minimum)
+                           (c-comment-continuation-stars . "")
+                           (c-hanging-comment-ender-p . t)))
 
-(defun my-c-mode-common-hook ()
+  (defun my-c-mode-common-hook ()
 
-  ;; my customizations for all of c-mode and related modes
-  (c-set-offset 'substatement-open 0)
-  (c-set-style "ttc")
+    ;; my customizations for all of c-mode and related modes
+    (c-set-offset 'substatement-open 0)
+    (c-set-style "ttc")
 
-  ;; other customizations can go here
-  )
+    ;; other customizations can go here
+    )
 
-(c-add-style "ttc" my-ttc-style )
+  (c-add-style "ttc" my-ttc-style )
 
-(add-hook 'c-mode-hook 'my-c-mode-common-hook)
-(add-hook 'c-mode-hook 'font-lock-mode)
+  (add-hook 'c-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'c-mode-hook 'font-lock-mode)
 #+END_SRC
 
 * toggle between horizontal and vertical window split
 
 #+BEGIN_SRC emacs-lisp
-(defun toggle-window-split ()
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-	     (next-win-buffer (window-buffer (next-window)))
-	     (this-win-edges (window-edges (selected-window)))
-	     (next-win-edges (window-edges (next-window)))
-	     (this-win-2nd (not (and (<= (car this-win-edges)
-					 (car next-win-edges))
-				     (<= (cadr this-win-edges)
-					 (cadr next-win-edges)))))
-	     (splitter
-	      (if (= (car this-win-edges)
-		     (car (window-edges (next-window))))
-		  'split-window-horizontally
-		'split-window-vertically)))
-	(delete-other-windows)
-	(let ((first-win (selected-window)))
-	  (funcall splitter)
-	  (if this-win-2nd (other-window 1))
-	  (set-window-buffer (selected-window) this-win-buffer)
-	  (set-window-buffer (next-window) next-win-buffer)
-	  (select-window first-win)
-	  (if this-win-2nd (other-window 1))))))
+  (defun toggle-window-split ()
+    (interactive)
+    (if (= (count-windows) 2)
+        (let* ((this-win-buffer (window-buffer))
+               (next-win-buffer (window-buffer (next-window)))
+               (this-win-edges (window-edges (selected-window)))
+               (next-win-edges (window-edges (next-window)))
+               (this-win-2nd (not (and (<= (car this-win-edges)
+                                           (car next-win-edges))
+                                       (<= (cadr this-win-edges)
+                                           (cadr next-win-edges)))))
+               (splitter
+                (if (= (car this-win-edges)
+                       (car (window-edges (next-window))))
+                    'split-window-horizontally
+                  'split-window-vertically)))
+          (delete-other-windows)
+          (let ((first-win (selected-window)))
+            (funcall splitter)
+            (if this-win-2nd (other-window 1))
+            (set-window-buffer (selected-window) this-win-buffer)
+            (set-window-buffer (next-window) next-win-buffer)
+            (select-window first-win)
+            (if this-win-2nd (other-window 1))))))
 
-(global-set-key (quote [?\C-c ?t]) (quote toggle-window-split) )
+  (global-set-key (quote [?\C-c ?t]) (quote toggle-window-split) )
 #+END_SRC
 
 * verilog
 ** load verilog mode
 
 #+BEGIN_SRC emacs-lisp
-(require 'verilog-mode)
-;; Load verilog mode only when needed
-(autoload 'verilog-mode "verilog-mode" "Verilog mode" t )
-;; Any files that end in .v, .dv or .sv should be in verilog mode
-(add-to-list 'auto-mode-alist '("\\.[ds]?v\\'" . verilog-mode))
-;; Any files in verilog mode should have their keywords colorized
-(add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
+  (require 'verilog-mode)
+  ;; Load verilog mode only when needed
+  (autoload 'verilog-mode "verilog-mode" "Verilog mode" t )
+  ;; Any files that end in .v, .dv or .sv should be in verilog mode
+  (add-to-list 'auto-mode-alist '("\\.[ds]?v\\'" . verilog-mode))
+  ;; Any files in verilog mode should have their keywords colorized
+  (add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
 #+END_SRC
 
 ** indent setup
 
 #+BEGIN_SRC emacs-lisp
-;; Set indent
-;;(setq verilog-indent-level 2)
-(defvar gc/verilog-indent-level 2)
-(setq verilog-indent-level gc/verilog-indent-level
-      verilog-indent-level-module gc/verilog-indent-level
-      verilog-indent-level-declaration gc/verilog-indent-level
-      verilog-indent-level-behavioral gc/verilog-indent-level
-      verilog-indent-level-directive gc/verilog-indent-level
-      verilog-case-indent gc/verilog-indent-level
-      verilog-cexp-indent gc/verilog-indent-level)
+  ;; Set indent
+  ;;(setq verilog-indent-level 2)
+  (defvar gc/verilog-indent-level 2)
+  (setq verilog-indent-level gc/verilog-indent-level
+        verilog-indent-level-module gc/verilog-indent-level
+        verilog-indent-level-declaration gc/verilog-indent-level
+        verilog-indent-level-behavioral gc/verilog-indent-level
+        verilog-indent-level-directive gc/verilog-indent-level
+        verilog-case-indent gc/verilog-indent-level
+        verilog-cexp-indent gc/verilog-indent-level)
 #+END_SRC
 
 ** defaults
 
 #+BEGIN_SRC emacs-lisp
 
-(setq verilog-align-ifelse t
-      verilog-auto-endcomments t
-      verilog-auto-indent-on-newline t
-      verilog-auto-lineup nil
-      verilog-auto-newline nil
-      verilog-date-scientific-format t
-      verilog-indent-begin-after-if t
-      verilog-highlight-grouping-keywords t
-      verilog-highlight-modules t
-      verilog-minimum-comment-distance 20
-      verilog-tab-always-indent t
-      verilog-tab-to-comment nil)
+  (setq verilog-align-ifelse t
+        verilog-auto-endcomments t
+        verilog-auto-indent-on-newline t
+        verilog-auto-lineup nil
+        verilog-auto-newline nil
+        verilog-date-scientific-format t
+        verilog-indent-begin-after-if t
+        verilog-highlight-grouping-keywords t
+        verilog-highlight-modules t
+        verilog-minimum-comment-distance 20
+        verilog-tab-always-indent t
+        verilog-tab-to-comment nil)
 #+END_SRC
 
 ** verilog minor mode
 
 #+BEGIN_SRC emacs-lisp
-(when (file-directory-p "~/.emacs.d/mode/verilog-minor-mode")
-  (add-to-list 'load-path "~/.emacs.d/mode/verilog-minor-mode")
-  ;(autoload 'verilog-minor-mode "verilog-minor-mode" "Verilog minor mode" t )
-  (require 'verilog-minor-mode)
-  ; add the paths to your repos here
-  ;(add-to-list 'vminor-path-to-repos '("/home/martin/github/uvm" . nil))
-  (add-hook 'verilog-mode-hook 'verilog-minor-mode))
+  (when (file-directory-p "~/.emacs.d/mode/verilog-minor-mode")
+    (add-to-list 'load-path "~/.emacs.d/mode/verilog-minor-mode")
+    ;(autoload 'verilog-minor-mode "verilog-minor-mode" "Verilog minor mode" t )
+    (require 'verilog-minor-mode)
+    ; add the paths to your repos here
+    ;(add-to-list 'vminor-path-to-repos '("/home/martin/github/uvm" . nil))
+    (add-hook 'verilog-mode-hook 'verilog-minor-mode))
 #+END_SRC
 
 * ido
 
 #+BEGIN_SRC emacs-lisp
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t) ;; enable fuzzy matching
+  (require 'ido)
+  (ido-mode t)
+  (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 #+END_SRC
 
 * erc
 
 #+BEGIN_SRC emacs-lisp
-(defun rgr/ido-erc-buffer()
-  (interactive)
-  (switch-to-buffer
-   (ido-completing-read "Channel:"
-                        (save-excursion
-                          (delq
-                           nil
-                           (mapcar (lambda (buf)
-                                     (when (buffer-live-p buf)
-                                       (with-current-buffer buf
-                                         (and (eq major-mode 'erc-mode)
-                                              (buffer-name buf)))))
-                                   (buffer-list)))))))
+  (defun rgr/ido-erc-buffer()
+    (interactive)
+    (switch-to-buffer
+     (ido-completing-read "Channel:"
+                          (save-excursion
+                            (delq
+                             nil
+                             (mapcar (lambda (buf)
+                                       (when (buffer-live-p buf)
+                                         (with-current-buffer buf
+                                           (and (eq major-mode 'erc-mode)
+                                                (buffer-name buf)))))
+                                     (buffer-list)))))))
 
-  (global-set-key (kbd "C-c e") 'rgr/ido-erc-buffer)
+    (global-set-key (kbd "C-c e") 'rgr/ido-erc-buffer)
 #+END_SRC
 
 * groovy
 
 #+BEGIN_SRC emacs-lisp
-(when (file-directory-p "~/.emacs.d/mode")
-    (add-to-list 'load-path "~/.emacs.d/mode")
-    (when (file-exists-p "~/.emacs.d/mode/groovy-mode.el")
-      (load "groovy-mode.el")
-      (require 'groovy-mode)
-      (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
-      (add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
+  (when (file-directory-p "~/.emacs.d/mode")
+      (add-to-list 'load-path "~/.emacs.d/mode")
+      (when (file-exists-p "~/.emacs.d/mode/groovy-mode.el")
+        (load "groovy-mode.el")
+        (require 'groovy-mode)
+        (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
+        (add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
+        )
       )
-    )
 #+END_SRC
 
 * fucking mac shit
 
 #+BEGIN_SRC emacs-lisp
-(setq x-super-keysym 'meta)
+  (setq x-super-keysym 'meta)
 #+END_SRC
 
 * emacs server
 
 #+BEGIN_SRC emacs-lisp
-(setq server-name
-      (if (getenv "VIRTDESCTOP")
-          (getenv "VIRTDESCTOP")
-        "my-e-server"))
-(server-start)
-; as I use multipple emacses for different virtual desctops I need to setup a
-; environment variabel describing which setup I am on
+  (setq server-name
+        (if (getenv "VIRTDESCTOP")
+            (getenv "VIRTDESCTOP")
+          "my-e-server"))
+  (server-start)
+  ; as I use multipple emacses for different virtual desctops I need to setup a
+  ; environment variabel describing which setup I am on
 #+END_SRC
 
 * tramp
 
 #+BEGIN_SRC emacs-lisp
-(setq tramp-default-method "ssh")
-(defun ido-remove-tramp-from-cache nil
-    "Remove any TRAMP entries from `ido-dir-file-cache'.
-    This stops tramp from trying to connect to remote hosts on emacs startup,
-    which can be very annoying."
-    (interactive)
-    (setq ido-dir-file-cache
-	  (cl-remove-if
-	   (lambda (x)
-	     (string-match "/\\(rsh\\|ssh\\|telnet\\|su\\|sudo\\|sshx\\|krlogin\\|ksu\\|rcp\\|scp\\|rsync\\|scpx\\|fcp\\|nc\\|ftp\\|smb\\|adb\\):" (car x)))
-	   ido-dir-file-cache)))
-  ;; redefine `ido-kill-emacs-hook' so that cache is cleaned before being saved
-  (defun ido-kill-emacs-hook ()
-    (ido-remove-tramp-from-cache)
-    (ido-save-history))
+  (setq tramp-default-method "ssh")
+  (defun ido-remove-tramp-from-cache nil
+      "Remove any TRAMP entries from `ido-dir-file-cache'.
+      This stops tramp from trying to connect to remote hosts on emacs startup,
+      which can be very annoying."
+      (interactive)
+      (setq ido-dir-file-cache
+            (cl-remove-if
+             (lambda (x)
+               (string-match "/\\(rsh\\|ssh\\|telnet\\|su\\|sudo\\|sshx\\|krlogin\\|ksu\\|rcp\\|scp\\|rsync\\|scpx\\|fcp\\|nc\\|ftp\\|smb\\|adb\\):" (car x)))
+             ido-dir-file-cache)))
+    ;; redefine `ido-kill-emacs-hook' so that cache is cleaned before being saved
+    (defun ido-kill-emacs-hook ()
+      (ido-remove-tramp-from-cache)
+      (ido-save-history))
 #+END_SRC
 
 * python
 
 #+BEGIN_SRC emacs-lisp
-(setq python-shell-interpreter "python3")
+  (setq python-shell-interpreter "python3")
 #+END_SRC
