@@ -39,7 +39,7 @@ TODO: check this one out
                                                    ; want ptr/crsr
 #+END_SRC
 
-* emacs gui settings
+* emacs general settings
 ** buffer name in titel bar
 
 #+BEGIN_SRC emacs-lisp
@@ -86,6 +86,12 @@ TODO: check this one out
 #+BEGIN_SRC emacs-lisp
   (when (fboundp 'windmove-default-keybindings)
     (windmove-default-keybindings))
+#+END_SRC
+
+** move all backups to same folder
+
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist (list (cons "." (concat user-emacs-directory "/backup"))))
 #+END_SRC
 
 * mode line
