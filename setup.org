@@ -381,6 +381,15 @@ TODO: check this one out
   (setq python-shell-interpreter "python3")
 #+END_SRC
 * elsip
+** turn show patan on in emacs-lisp-mode
 #+BEGIN_SRC emacs-lisp
   (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 #+END_SRC
+** set it to highlight the hole expression between the parenteses
+#+BEGIN_SRC emacs-lisp
+  (setq show-paren-style 'expression)
+#+END_SRC
+** if you want highlighting when the cursor is inside the parenteses use
+   (setq show-paren-when-point-inside-paren t)
+*** try to use tangle-no here
+** TODO check if you can get this elisp buffer local
