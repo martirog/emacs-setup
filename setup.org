@@ -388,6 +388,9 @@ TODO: check this one out
 ** set it to highlight the hole expression between the parenteses
 #+BEGIN_SRC emacs-lisp
   (setq show-paren-style 'expression)
+  (require 'paren)
+  (set-face-background 'show-paren-match "#2E001B")
+  ;#810797 "#990045" "#470028"
 #+END_SRC
 ** if you want highlighting when the cursor is inside the parenteses use
    (setq show-paren-when-point-inside-paren t)
