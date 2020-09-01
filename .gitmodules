@@ -1,0 +1,3 @@
+[submodule "modes/verilog-minor-mode"]
+	path = modes/verilog-minor-mode
+	url = git@github.com:martirog/verilog-minor-mode.git
