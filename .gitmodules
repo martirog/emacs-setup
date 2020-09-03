@@ -1,3 +1,6 @@
 [submodule "modes/verilog-minor-mode"]
 	path = modes/verilog-minor-mode
 	url = git@github.com:martirog/verilog-minor-mode.git
+[submodule "modes/uvm-log-mode"]
+	path = modes/uvm-log-mode
+	url = git@github.com:martirog/uvm-log-mode.git
