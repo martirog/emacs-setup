@@ -284,6 +284,7 @@ TODO: check this one out
 #+END_SRC
 
 ** verilog minor mode
+   This is written by me so tread lightly
 
 #+BEGIN_SRC emacs-lisp
   (when (file-directory-p "~/.emacs.d/modes/verilog-minor-mode")
@@ -293,6 +294,19 @@ TODO: check this one out
     ; add the paths to your repos here
     ;(add-to-list 'vminor-path-to-repos '("/home/martin/github/uvm" . nil))
     (add-hook 'verilog-mode-hook 'verilog-minor-mode))
+#+END_SRC
+
+** uvm log mode
+   this is another one of my own half baked modes so this is danger danger
+
+#+BEGIN_SRC emacs-lisp
+  (when (file-directory-p "~/.emacs.d/modes/uvm-log-mode")
+    (add-to-list 'load-path "~/.emacs.d/modes/uvm-log-mode")
+    ;(autoload 'verilog-minor-mode "verilog-minor-mode" "Verilog minor mode" t )
+    (require 'uvm-log-mode)
+    ; add the paths to your repos here
+    ;(add-to-list 'vminor-path-to-repos '("/home/martin/github/uvm" . nil))
+    (add-to-list 'auto-mode-alist '("\\transcript\\'" . uvm-log-mode)))
 #+END_SRC
 
 * ido
