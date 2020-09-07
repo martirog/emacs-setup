@@ -410,3 +410,22 @@ TODO: check this one out
    (setq show-paren-when-point-inside-paren t)
 *** try to use tangle-no here
 ** TODO check if you can get this elisp buffer local
+* vc
+** follow renames
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq vc-git-print-log-follow t)
+#+END_SRC
+
+* ediff
+** split vertical
+
+#+BEGIN_SRC emacs-lisp
+  (setq ediff-split-window-function 'split-window-horizontally)
+#+END_SRC
+
+** keep in one frame
+
+#+BEGIN_SRC emacs-lisp
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+END_SRC
