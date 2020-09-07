@@ -417,6 +417,13 @@ TODO: check this one out
   (setq vc-git-print-log-follow t)
 #+END_SRC
 
+** invoke vc-ediff on "="
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load "vc-hooks"
+    '(define-key vc-prefix-map "=" 'vc-ediff))
+#+END_SRC
+
 * ediff
 ** split vertical
 
