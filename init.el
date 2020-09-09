@@ -9,3 +9,7 @@
 (org-babel-load-file
  (expand-file-name "setup.org"
                    user-emacs-directory))
+
+(org-babel-load-file
+  (expand-file-name "work-setup.org"
+                  user-emacs-directory))

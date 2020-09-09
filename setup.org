@@ -1,5 +1,5 @@
 use "C-c '" to edit code blocks
-
+tangle with "C-c C-v t"
 
 * setup colors
 ** frame background
@@ -158,6 +158,12 @@ TODO: check this one out
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c +") 'quick-calc)
+#+END_SRC
+
+** org capture
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c c") 'org-capture)
 #+END_SRC
 
 * cc-mode
@@ -409,7 +415,7 @@ TODO: check this one out
 ** if you want highlighting when the cursor is inside the parenteses use
    (setq show-paren-when-point-inside-paren t)
 *** try to use tangle-no here
-** TODO check if you can get this elisp buffer local
+** DONE check if you can get this elisp buffer locla
 * vc
 ** follow renames
 
@@ -435,4 +441,38 @@ TODO: check this one out
 
 #+BEGIN_SRC emacs-lisp
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+END_SRC
+* org
+  org-capture is set to C-c c in the global key bindigs
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org)
+#+END_SRC
+
+** set default directory to put org files
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-directory (concat user-emacs-directory "/org"))
+#+END_SRC
+
+** org capture templates
+*** emacs backlog
+    This is a test. so will need rename as there is more then one backlog
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-capture-templates
+               '("e" "things to fix in emacs" entry
+                 (file+headline "emacs_backlog.org" "backlog")
+                   "* TODO %?\n%t"))
+#+END_SRC
+
+
+*** misc backlog
+    This is a test. so will need rename as there is more then one backlog
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-capture-templates
+               '("m" "things to fix" entry
+                 (file+headline "backlog.org" "misc backlog")
+                   "* TODO %?\n%t"))
 #+END_SRC
