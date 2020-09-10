@@ -447,12 +447,15 @@ TODO: check this one out
 
 #+BEGIN_SRC emacs-lisp
   (require 'org)
+  (require 'org-agenda)
 #+END_SRC
 
 ** set default directory to put org files
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-directory (concat user-emacs-directory "/org"))
+  (let ((orgdir (concat user-emacs-directory "/org")))
+    (setq org-directory orgdir)
+    (setq org-agenda-files `(,orgdir)))
 #+END_SRC
 
 ** org capture templates
