@@ -323,6 +323,13 @@ TODO: check this one out
   (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 #+END_SRC
 
+** vertically show compleation optuins DISABLED
+
+#+BEGIN_SRC emacs-lisp :tangle no
+   ;; Display ido results vertically, rather than horizontally
+  (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+#+END_SRC
+
 * erc
 
 #+BEGIN_SRC emacs-lisp
@@ -448,6 +455,7 @@ TODO: check this one out
 #+BEGIN_SRC emacs-lisp
   (require 'org)
   (require 'org-agenda)
+  (require 'org-capture)
 #+END_SRC
 
 ** set default directory to put org files
@@ -476,6 +484,6 @@ TODO: check this one out
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-capture-templates
                '("m" "things to fix" entry
-                 (file+headline "backlog.org" "misc backlog")
+                 (file+headline "misc_backlog.org" "misc backlog")
                    "* TODO %?\n%t"))
 #+END_SRC
