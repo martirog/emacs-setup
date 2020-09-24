@@ -322,6 +322,11 @@ TODO: check this one out
   (ido-mode t)
   (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 #+END_SRC
+** Dont look for files in other than the present directory
+
+#+BEGIN_SRC emacs-lisp
+  (setq ido-auto-merge-work-directories-length -1)
+#+END_SRC
 
 ** vertically show compleation optuins DISABLED
 
