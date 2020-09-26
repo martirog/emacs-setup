@@ -4,3 +4,6 @@
 [submodule "modes/uvm-log-mode"]
 	path = modes/uvm-log-mode
 	url = git@github.com:martirog/uvm-log-mode.git
+[submodule "modes/facker-mode"]
+	path = modes/facker-mode
+	url = git@github.com:martirog/facker-mode.git

@@ -454,6 +454,7 @@ TODO: check this one out
 #+BEGIN_SRC emacs-lisp
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 #+END_SRC
+
 * org
   org-capture is set to C-c c in the global key bindigs
 
@@ -491,4 +492,16 @@ TODO: check this one out
                '("m" "things to fix" entry
                  (file+headline "misc_backlog.org" "misc backlog")
                    "* TODO %?\n%t"))
+#+END_SRC
+
+* facker mode
+  Hide the fact that I use the arrow keys all the time.
+  and its funn to create my own layout
+
+#+BEGIN_SRC emacs-lisp
+  (when (file-directory-p "~/.emacs.d/modes/facker-mode")
+    (add-to-list 'load-path "~/.emacs.d/modes/facker-mode")
+    (require 'facker-mode))
+
+  (global-set-key (kbd "C-z") 'facker-mode)
 #+END_SRC
