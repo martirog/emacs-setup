@@ -10,4 +10,4 @@
  (expand-file-name "setup.org"
                    user-emacs-directory))
 
-(mapc #'org-babel-load-file (directory-files "extra" t "\\.org$"))
+(mapc #'org-babel-load-file (directory-files (concat user-emacs-directory "extra") t "\\.org$"))
