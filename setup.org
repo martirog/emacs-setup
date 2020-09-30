@@ -503,5 +503,5 @@ TODO: check this one out
     (add-to-list 'load-path "~/.emacs.d/modes/facker-mode")
     (require 'facker-mode))
 
-  (global-set-key (kbd "C-z") 'facker-mode)
+  (global-set-key (kbd "C-j") 'facker-mode)
 #+END_SRC
