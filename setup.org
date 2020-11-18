@@ -494,6 +494,12 @@ TODO: check this one out
                    "* TODO %?\n%t"))
 #+END_SRC
 
+** add languages to be evaluated in SRC block's
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-babel-load-languages '(shell . t))
+#+END_SRC
+
 * facker mode
   Hide the fact that I use the arrow keys all the time.
   and its funn to create my own layout
