@@ -1,5 +1,5 @@
 use "C-c '" to edit code blocks
-tangle with "C-c C-v t"
+tna with C-c C-v t
 
 * setup colors
 ** frame background
@@ -30,13 +30,26 @@ tangle with "C-c C-v t"
 #+END_SRC
 
 ** xpointer
-TODO: check this one out
 
 #+BEGIN_SRC emacs-lisp
   (setq x-pointer-foreground-color "black")        ; Adds to bg color,
                                                    ; so keep black
   (setq x-pointer-background-color "blue")         ; This is color you really
                                                    ; want ptr/crsr
+#+END_SRC
+*** TODO : check this one out
+
+** window devider
+   Remove window deviders. Not sure this is something I want?
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (window-divider-mode)
+  (set-face-foreground 'window-divider "black")
+  (set-face-foreground 'window-divider-first-pixel "black")
+  (set-face-foreground 'window-divider-last-pixel "black")
+  (set-face-attribute 'fringe nil
+                        :foreground (face-foreground 'default)
+                        :background "black")
 #+END_SRC
 
 * emacs general settings
@@ -510,4 +523,12 @@ TODO: check this one out
     (require 'facker-mode))
 
   (global-set-key (kbd "C-j") 'facker-mode)
+#+END_SRC
+
+* change to dwim functions
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (global-set-key (kbd "M-u") 'upcase-dwim)
+  (global-set-key (kbd "M-l") 'downcase-dwim)
+  (global-set-key (kbd "M-c") 'capitalized-dwim)
 #+END_SRC
