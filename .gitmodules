@@ -7,3 +7,6 @@
 [submodule "modes/faker-mode"]
 	path = modes/faker-mode
 	url = git@github.com:martirog/faker-mode.git
+[submodule "modes/ido-compleating-read-in-buffer"]
+	path = modes/ido-compleating-read-in-buffer
+	url = git@github.com:martirog/ido-compleating-read-in-buffer.git
