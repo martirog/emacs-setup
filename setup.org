@@ -108,6 +108,12 @@ tna with C-c C-v t
   (setq backup-directory-alist (list (cons "." (concat user-emacs-directory "/backup"))))
 #+END_SRC
 
+** dont ring the bell
+   turn off sound for example at wrapping search
+#+BEGIN_SRC emacs-lisp
+  (setq ring-bell-function 'ignore)
+#+END_SRC
+
 * mode line
 ** default colors
 
