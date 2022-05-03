@@ -186,6 +186,12 @@ tna with C-c C-v t
   (global-set-key (kbd "C-c c") 'org-capture)
 #+END_SRC
 
+* etags-wrapper
+#+BEGIN_SRC emacs-lisp
+    (when (file-directory-p "~/.emacs.d/modes/etags-wrapper")
+      (add-to-list 'load-path "~/.emacs.d/modes/etags-wrapper")
+      (require 'etags-wrapper))
+#+END_SRC
 * cc-mode
 
 #+BEGIN_SRC emacs-lisp
@@ -232,6 +238,14 @@ tna with C-c C-v t
   (add-hook 'c-mode-hook 'font-lock-mode)
 #+END_SRC
 
+** c minor mode
+#+BEGIN_SRC emacs-lisp
+  (when (file-directory-p "~/.emacs.d/modes/cminor-mode")
+    (add-to-list 'load-path "~/.emacs.d/modes/cminor-mode")
+    (require 'cminor-mode)
+    (add-hook 'c-mode-hook 'cminor-mode))
+#+END_SRC
+
 * toggle between horizontal and vertical window split
 
 #+BEGIN_SRC emacs-lisp
@@ -263,13 +277,6 @@ tna with C-c C-v t
   (global-set-key (quote [?\C-c ?t]) (quote toggle-window-split) )
 #+END_SRC
 
-* etags-wrapper
-#+BEGIN_SRC emacs-lisp
-    (when (file-directory-p "~/.emacs.d/modes/etags-wrapper")
-      (add-to-list 'load-path "~/.emacs.d/modes/etags-wrapper")
-      (require 'etags-wrapper))
-#+END_SRC
-  
 * ido-compleating-read-in-buffer
 
   this is used by verilog minor mode so it needs to be set before that
