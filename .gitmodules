@@ -13,3 +13,6 @@
 [submodule "modes/etags-wrapper"]
 	path = modes/etags-wrapper
 	url = git@github.com:martirog/etags-wrapper.git
+[submodule "modes/cminor-mode"]
+	path = modes/cminor-mode
+	url = git@github.com:martirog/cminor-mode.git
