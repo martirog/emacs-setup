@@ -192,6 +192,13 @@ tna with C-c C-v t
       (add-to-list 'load-path "~/.emacs.d/modes/etags-wrapper")
       (require 'etags-wrapper))
 #+END_SRC
+* ido-compleating-read-in-buffer
+
+  this is used by verilog minor mode so it needs to be set before that
+#+BEGIN_SRC emacs-lisp
+  (when (file-directory-p "~/.emacs.d/modes/ido-compleating-read-in-buffer")
+    (load "~/.emacs.d/modes/ido-compleating-read-in-buffer/ido-compleation-read-in-buffer.el"))
+#+END_SRC
 * cc-mode
 
 #+BEGIN_SRC emacs-lisp
@@ -275,14 +282,6 @@ tna with C-c C-v t
             (if this-win-2nd (other-window 1))))))
 
   (global-set-key (quote [?\C-c ?t]) (quote toggle-window-split) )
-#+END_SRC
-
-* ido-compleating-read-in-buffer
-
-  this is used by verilog minor mode so it needs to be set before that
-#+BEGIN_SRC emacs-lisp
-  (when (file-directory-p "~/.emacs.d/modes/ido-compleating-read-in-buffer")
-    (load "~/.emacs.d/modes/ido-compleating-read-in-buffer/ido-compleation-read-in-buffer.el"))
 #+END_SRC
 
 * verilog
