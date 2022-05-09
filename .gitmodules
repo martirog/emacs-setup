@@ -1,18 +1,18 @@
 [submodule "modes/verilog-minor-mode"]
 	path = modes/verilog-minor-mode
-	url = git@github.com:martirog/verilog-minor-mode.git
+	url = ../verilog-minor-mode.git
 [submodule "modes/uvm-log-mode"]
 	path = modes/uvm-log-mode
-	url = git@github.com:martirog/uvm-log-mode.git
+	url = ../uvm-log-mode.git
 [submodule "modes/faker-mode"]
 	path = modes/faker-mode
-	url = git@github.com:martirog/faker-mode.git
+	url = ../faker-mode.git
 [submodule "modes/ido-compleating-read-in-buffer"]
 	path = modes/ido-compleating-read-in-buffer
-	url = git@github.com:martirog/ido-compleating-read-in-buffer.git
+	url = ../ido-compleating-read-in-buffer.git
 [submodule "modes/etags-wrapper"]
 	path = modes/etags-wrapper
-	url = git@github.com:martirog/etags-wrapper.git
+	url = ../etags-wrapper.git
 [submodule "modes/cminor-mode"]
 	path = modes/cminor-mode
-	url = git@github.com:martirog/cminor-mode.git
+	url = ../cminor-mode.git
