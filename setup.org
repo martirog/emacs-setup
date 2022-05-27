@@ -366,8 +366,9 @@ tna with C-c C-v t
 #+END_SRC
 
 ** try to guess context when opening file at point
-
-#+BEGIN_SRC emacs-lisp
+   This is quite helpfull at times but right now its a little to active
+   I think I cud get used to it, but turning it off for now
+#+BEGIN_SRC emacs-lisp :tangle no
   (setq ido-use-filename-at-point 'guess)
 #+END_SRC
 
