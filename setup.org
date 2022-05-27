@@ -250,7 +250,8 @@ tna with C-c C-v t
   (when (file-directory-p "~/.emacs.d/modes/cminor-mode")
     (add-to-list 'load-path "~/.emacs.d/modes/cminor-mode")
     (require 'cminor-mode)
-    (add-hook 'c-mode-hook 'cminor-mode))
+    (add-hook 'c-mode-hook 'cminor-mode)
+    (add-hook 'c++-mode-hook 'cminor-mode))
 #+END_SRC
 
 * toggle between horizontal and vertical window split
