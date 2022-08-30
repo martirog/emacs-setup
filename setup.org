@@ -2,44 +2,51 @@ use "C-c '" to edit code blocks
 tna with C-c C-v t
 
 * setup colors
-** frame background
+** < 28
+*** frame background
 
 #+BEGIN_SRC emacs-lisp
-  (set-face-background 'default "black")
+  (when (version< emacs-version "28")
+    (set-face-background 'default "black"))
 #+END_SRC
 
-** normal text
+*** normal text
 
 #+BEGIN_SRC emacs-lisp
-  (set-face-foreground 'default "bisque")
+  (when (version< emacs-version "28")
+    (set-face-foreground 'default "bisque"))
 #+END_SRC
 
-** cursor color
+*** cursor color
 
 #+BEGIN_SRC emacs-lisp
-  (set-cursor-color "bisque") ; did not need this before 23.1?
+  (when (version< emacs-version "28")
+    (set-cursor-color "bisque")) ; did not need this before 23.1?
 #+END_SRC
 
-** higlights
+*** higlights
 
 #+BEGIN_SRC emacs-lisp
-  (set-face-background 'highlight "blue")
-  (set-face-foreground 'highlight "yellow")
-  (set-face-background 'isearch "yellow")
-  (set-face-foreground 'isearch "red")
+  (when (version< emacs-version "28")
+    (set-face-background 'highlight "blue")
+    (set-face-foreground 'highlight "yellow")
+    (set-face-background 'isearch "yellow")
+    (set-face-foreground 'isearch "red"))
 #+END_SRC
 
-** xpointer
+*** xpointer
 
 #+BEGIN_SRC emacs-lisp
-  (setq x-pointer-foreground-color "black")        ; Adds to bg color,
-                                                   ; so keep black
-  (setq x-pointer-background-color "blue")         ; This is color you really
-                                                   ; want ptr/crsr
+  (when (version< emacs-version "28")
+    (setq x-pointer-foreground-color "black")        ; Adds to bg color,
+                                                     ; so keep black
+    (setq x-pointer-background-color "blue"))        ; This is color you really
+                                                     ; want ptr/crsr
 #+END_SRC
 *** TODO : check this one out
 
-** window devider
+*** window devider
+
    Remove window deviders. Not sure this is something I want?
 
 #+BEGIN_SRC emacs-lisp
@@ -48,10 +55,22 @@ tna with C-c C-v t
   (set-face-foreground 'window-divider-first-pixel "black")
   (set-face-foreground 'window-divider-last-pixel "black")
   (set-face-attribute 'fringe nil
-                        :foreground (face-foreground 'default)
-                        :background "black")
+                      :foreground (face-foreground 'default)
+                      :background "black")
   (setq window-divider-default-right-width 1)
 #+END_SRC
+
+** >= 28
+*** load theme
+using the alternate syntax here as these yeld a warmer
+color palet. not that faund of pastell. And the yellow comments
+to better seperate comments and code
+#+BEGIN_SRC emacs-lisp
+  (when (version< "28.1" emacs-version)
+    (setq modus-themes-syntax '(yellow-comments alt-syntax))
+    (load-theme 'modus-vivendi))
+#+END_SRC
+
 
 * emacs general settings
 ** buffer name in titel bar
@@ -102,10 +121,12 @@ tna with C-c C-v t
     (windmove-default-keybindings))
 #+END_SRC
 
-** move all backups to same folder
+** move all backup
+s to same folder
 
 #+BEGIN_SRC emacs-lisp
   (setq backup-directory-alist (list (cons "." (concat user-emacs-directory "/backup"))))
+  (setq auto-save-file-name-transformers (list (cons "." (concat user-emacs-directory "/backup"))))
 #+END_SRC
 
 ** dont ring the bell
@@ -543,6 +564,14 @@ tna with C-c C-v t
                '("m" "things to fix" entry
                  (file+headline "misc_backlog.org" "misc backlog")
                    "* TODO %?\n%t"))
+#+END_SRC
+
+*** tips and trix
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-capture-templates
+               '("t" "Tips and Trix" entry
+                 (file+headline "tips_and_trix.org" "help")
+                   "* %?\n%t"))
 #+END_SRC
 
 ** add languages to be evaluated in SRC block's
