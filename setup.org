@@ -50,14 +50,15 @@ tna with C-c C-v t
    Remove window deviders. Not sure this is something I want?
 
 #+BEGIN_SRC emacs-lisp
-  (window-divider-mode)
-  (set-face-foreground 'window-divider "white")
-  (set-face-foreground 'window-divider-first-pixel "black")
-  (set-face-foreground 'window-divider-last-pixel "black")
-  (set-face-attribute 'fringe nil
-                      :foreground (face-foreground 'default)
-                      :background "black")
-  (setq window-divider-default-right-width 1)
+  (when (version< "25" emacs-version)
+    (window-divider-mode)
+    (set-face-foreground 'window-divider "white")
+    (set-face-foreground 'window-divider-first-pixel "black")
+    (set-face-foreground 'window-divider-last-pixel "black")
+    (set-face-attribute 'fringe nil
+                        :foreground (face-foreground 'default)
+                        :background "black")
+    (setq window-divider-default-right-width 1))
 #+END_SRC
 
 ** >= 28
