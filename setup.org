@@ -461,9 +461,17 @@ s to same folder
 #+END_SRC
 
 * tramp
+#+BEGIN_SRC emacs-lisp
+  (require 'tramp)
+#+END_SRC
 
+** set default protocol
 #+BEGIN_SRC emacs-lisp
   (setq tramp-default-method "ssh")
+#+END_SRC
+
+** ido fixes
+#+BEGIN_SRC emacs-lisp
   (defun ido-remove-tramp-from-cache nil
     "Remove any TRAMP entries from `ido-dir-file-cache'.
       This stops tramp from trying to connect to remote hosts on emacs startup,
@@ -480,6 +488,12 @@ s to same folder
     (ido-save-history))
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 #+END_SRC
+
+** use remote PATH
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+#+END_SRC
+
 
 * python
 
