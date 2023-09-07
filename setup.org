@@ -602,3 +602,8 @@ s to same folder
   (global-set-key (kbd "M-c") 'capitalized-dwim)
 #+END_SRC
 
+* narrow
+narrowing is disabled by default in emacs. keep it active
+#+BEGIN_SRC emacs-lisp :tangle no
+  (put 'narrow-to-region 'disabled nil)
+#+END_SRC
