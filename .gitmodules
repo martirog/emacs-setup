@@ -16,3 +16,6 @@
 [submodule "modes/cminor-mode"]
 	path = modes/cminor-mode
 	url = ../cminor-mode.git
+[submodule "modes/project-wrapper"]
+	path = modes/project-wrapper
+	url = ../project-wrapper.git
