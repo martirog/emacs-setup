@@ -214,6 +214,15 @@ s to same folder
       (add-to-list 'load-path "~/.emacs.d/modes/etags-wrapper")
       (require 'etags-wrapper))
 #+END_SRC
+
+* project-wrapper
+#+BEGIN_SRC emacs-lisp
+  (when (file-directory-p "~/.emacs.d/modes/project-wrapper/")
+    (add-to-list 'load-path "~/.emacs.d/modes/project-wrapper/")
+    (require 'project-wrapper))
+
+#+END_SRC
+
 * ido-compleating-read-in-buffer
 
   this is used by verilog minor mode so it needs to be set before that
