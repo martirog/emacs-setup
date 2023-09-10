@@ -126,8 +126,13 @@ to better seperate comments and code
 s to same folder
 
 #+BEGIN_SRC emacs-lisp
-  (setq backup-directory-alist (list (cons "." (concat user-emacs-directory "/backup"))))
-  (setq auto-save-file-name-transformers (list (cons "." (concat user-emacs-directory "/backup"))))
+  (let ((backup-path (concat user-emacs-directory "/backup")))
+    (setq lock-file-name-transforms
+	  (list (list "\\`/.*/\\([^/]+\\)\\'" backup-path t)))
+    (setq auto-save-file-name-transforms
+	  (list (list "\\`/.*/\\([^/]+\\)\\'" backup-path t)))
+    (setq backup-directory-alist
+	  (list (cons ".*" backup-path))))
 #+END_SRC
 
 ** dont ring the bell
