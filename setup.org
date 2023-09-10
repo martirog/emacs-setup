@@ -122,8 +122,10 @@ to better seperate comments and code
     (windmove-default-keybindings))
 #+END_SRC
 
-** move all backup
-s to same folder
+** move all backup to same folder
+as well as lock and auto save files
+
+WARNING: bugs here can cause emacs to be unable to save files and exit.
 
 #+BEGIN_SRC emacs-lisp
   (let ((backup-path (concat user-emacs-directory "/backup")))
