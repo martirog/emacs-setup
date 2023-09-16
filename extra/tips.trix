@@ -1,0 +1,27 @@
+* verilog
+
+#+BEGIN_SRC emacs-lisp
+  (defun my-project-wrapper-get-env-func (pr-root)
+    (let* ((cmd (concat "TEST=hmmm cd " pr-root " && env -0"))
+           (env-string (shell-command-to-string cmd)))
+      (butlast (split-string env-string "\0"))))
+
+  (project-wrapper-add-info
+   (make-project-wrapper-info :root "~/github/uvm/"
+                              :get-env-func 'my-project-wrapper-get-env-func
+                              :external-roots (list (make-project-wrapper-exroot-info :root "~/github/verilog-mode/tests_ok/"
+                                                                                      :exclutions '("test_batch_ok")
+                                                                                      :static t))))
+#+END_SRC
+
+* C
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (add-to-list 'cminor-path-to-repos '("~/github/uvm/" . nil))
+#+END_SRC
+
+* UVM
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (add-to-list 'auto-mode-alist '("\\transcript\\'" . uvm-log-mode)))
+#+END_SRC
