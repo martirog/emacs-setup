@@ -177,10 +177,11 @@ WARNING: bugs here can cause emacs to be unable to save files and exit.
 #+END_SRC
 
 * global key mods
-** grep find
+** rgrep (find)
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (quote [?\C-c ?f]) (quote grep-find) )
+  ;(global-set-key (quote [?\C-c ?f]) (quote grep-find) )
+  (global-set-key (quote [?\C-c ?f]) (quote rgrep) )
   ; move to the grep buffer after run
   (add-hook 'grep-mode-hook
             '(lambda ()
@@ -379,7 +380,8 @@ WARNING: bugs here can cause emacs to be unable to save files and exit.
     (require 'verilog-minor-mode)
     ; add the paths to your repos here
     ;(add-to-list 'vminor-path-to-repos '("/home/martin/github/uvm" . nil))
-    (add-hook 'verilog-mode-hook 'verilog-minor-mode))
+    (add-hook 'verilog-mode-hook 'verilog-minor-mode)
+    (setq grep-files-aliases (vminor-create-grep-files-aliases)))
 #+END_SRC
 
 ** uvm log mode
