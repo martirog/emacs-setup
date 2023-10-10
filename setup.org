@@ -143,6 +143,12 @@ WARNING: bugs here can cause emacs to be unable to save files and exit.
   (setq ring-bell-function 'ignore)
 #+END_SRC
 
+** increase large files warning size
+set the limit for emacs to ask if a large file shuld be opened
+#+BEGIN_SRC emacs-lisp
+  (setq large-file-warning-threshold 80000000)
+#+END_SRC
+
 * mode line
 ** default colors
 
