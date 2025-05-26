@@ -682,3 +682,10 @@ setting it to t for now. should be set top 'first-error when the issues with xce
 #+BEGIN_SRC emacs-lisp
   (setq compilation-scroll-output t)
 #+END_SRC
+
+* adding MELPA
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.org/packages/") t)
+#+END_SRC
