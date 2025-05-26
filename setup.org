@@ -79,6 +79,15 @@ to better seperate comments and code
     (load-theme 'modus-vivendi))
 #+END_SRC
 
+** transparent frame
+Not sure this is something that I ever want to use but it is cool sometimes so leave it here for later
+the alpha-background not working at the moment for me althow this is prefered as the tests will not be transparent
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;(set-frame-parameter (selected-frame) 'alpha-background 85)
+  ;(add-to-list 'default-frame-alist '(alpha-background . 70))
+  (set-frame-parameter (selected-frame) 'alpha '(85 50))
+  (add-to-list 'default-frame-alist '(alpha 85 50))
+#+END_SRC
 
 * emacs general settings
 ** buffer name in titel bar
