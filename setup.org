@@ -712,3 +712,103 @@ setting it to t for now. should be set top 'first-error when the issues with xce
     :config
     (org-roam-setup))
 #+END_SRC
+
+** Use Org-agenda with org-roam (not functionell at this time)
+Since org-agenda does not work to well with multipple files keeping a list of the org-roam files that has TODO's in it helps org-agenda speed up.
+
+this is taken from this artical [[https://www.d12frosted.io/posts/2021-01-16-task-management-with-roam-vol5][Task management with org-roam Vol. 5: Dynamic and fast agenda]]
+
+*** Check if org-rome file has project tag
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun check-org-roam-file-if-project-p ()
+    "Return non-nil if current buffer has any todo entry.
+
+  TODO entries marked as done are ignored, meaning the this
+  function returns nil if current buffer contains only completed
+  tasks."
+    (org-element-map
+        (org-element-parse-buffer 'headline)
+        'headline
+      (lambda (h)
+        (eq (org-element-property :todo-type h)
+            'todo))
+      nil 'first-match))
+#+END_SRC
+
+*** Add a tag to all org-roam files that has TODO's
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun update-org-roam-with-project-tag ()
+    "Update PROJECT tag in the current buffer."
+      (when (and (not (active-minibuffer-window))
+               (check-for-org-roam-buffer-p))
+      (let* ((file (buffer-file-name (buffer-base-buffer)))
+             (all-tags (org-roam--extract-tags file))
+             (prop-tags (org-roam--extract-tags-prop file))
+             (tags prop-tags))
+        (if (check-org-roam-file-if-project-p)
+            (setq tags (cons "Project" tags))
+          (setq tags (remove "Project" tags)))
+        (unless (eq prop-tags tags)
+          (org-roam--set-global-prop
+           "ROAM_TAGS"
+           (combine-and-quote-strings (seq-uniq tags)))))))
+#+END_SRC
+
+since all tags propagate to childs that creates extra mess that is not needed
+But we can remove that
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (add-to-list 'org-tags-exclude-from-inheritance "project")
+#+END_SRC
+
+We need to check for updates when storing files, if the change is a TODO.
+The article also do say to update when finding a file, but I can not see the reasoin for this so commenting out until I become wise.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;(add-hook 'find-file-hook #'update-org-roam-with-project-tag)
+  (add-hook 'before-save-hook #'update-org-roam-with-project-tag)
+#+END_SRC
+
+To only try this for org-roam buffers we have a heper function to detect org-roam buffers
+
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun check-for-org-roam-buffer-p ()
+    "Return non-nil if the currently visited buffer is a note."
+    (and buffer-file-name
+         (string-prefix-p
+          (expand-file-name (file-name-as-directory org-roam-directory))
+          (file-name-directory buffer-file-name))))
+#+END_SRC
+
+*** querry org-roam DB for all files with project tag
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun query-org-roam-db-for-project-files ()
+    "Return a list of note files containing 'project' tag." ;
+    (seq-uniq
+     (seq-map
+      #'car
+      (org-roam-db-query
+       [:select [nodes:file]
+        :from tags
+        :left-join nodes
+        :on (= tags:node-id nodes:id)
+        :where (like tag (quote "%\"project\"%"))]))))
+#+END_SRC
+
+*** for now create a seperate function for calling this org-agenda as you have old org agenda stuff
+Move it over to use standard org-agenda at some point
+(advice-add 'org-agenda :before #'vulpea-agenda-files-update)
+(advice-add 'org-todo-list :before #'vulpea-agenda-files-update)
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defun use-org-roam-files-for-org-agenda (&rest args)
+    "Change the filelist used by org-agenda to the org-roam files for todo search"
+    (interactive)
+    (let ((org-agenda-files (query-org-roam-db-for-project-files)))
+      (message org-agenda-files)
+      (org-agenda args)))
+#+END_SRC
