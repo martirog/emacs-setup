@@ -381,18 +381,19 @@ set the limit for emacs to ask if a large file shuld be opened
 
 #+BEGIN_SRC emacs-lisp
 
-  (setq verilog-align-ifelse t
-        verilog-auto-endcomments t
-        verilog-auto-indent-on-newline t
-        verilog-auto-lineup nil
-        verilog-auto-newline nil
-        verilog-date-scientific-format t
-        verilog-indent-begin-after-if t
-        verilog-highlight-grouping-keywords t
-        verilog-highlight-modules t
-        verilog-minimum-comment-distance 20
-        verilog-tab-always-indent t
-        verilog-tab-to-comment nil)
+    (setq verilog-align-ifelse t
+          verilog-auto-endcomments nil
+          verilog-auto-indent-on-newline t
+          verilog-auto-lineup nil
+          verilog-auto-newline nil
+          verilog-date-scientific-format t
+          verilog-indent-begin-after-if t
+          verilog-highlight-grouping-keywords t
+          verilog-highlight-modules t
+          verilog-minimum-comment-distance 20
+          verilog-tab-always-indent t
+          verilog-tab-to-comment nil
+          verilog-indent-class-inside-pkg nil)
 #+END_SRC
 
 ** verilog minor mode
