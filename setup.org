@@ -178,6 +178,7 @@ set the limit for emacs to ask if a large file shuld be opened
 ** layout with costum colors
 
 #+BEGIN_SRC emacs-lisp
+  (require 'project)
   (setq-default mode-line-format
                 (list
                  "%e"
@@ -193,6 +194,7 @@ set the limit for emacs to ask if a large file shuld be opened
                  '(vc-mode vc-mode)
                  "  "
                  '(:propertize mode-line-modes face (:foreground "#CF70F7"))
+                 '(project-mode-line project-mode-line-format)
                  '(:propertize mode-line-misc-info face (:foreground "#CC92E0"))
                  'mode-line-end-spaces
                  ))
