@@ -665,3 +665,14 @@ narrowing is disabled by default in emacs. keep it active
 #+BEGIN_SRC emacs-lisp :tangle no
   (put 'narrow-to-region 'disabled nil)
 #+END_SRC
+
+* version control
+** disable trap checking version control
+as we are not able to use vc in emacs do to not encripting passwords disaable the feature
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq vc-ignore-dir-regexp
+        (format "\\(%s\\)\\|\\(%s\\)"
+                vc-ignore-dir-regexp
+                tramp-file-name-regexp))
+#+END_SRC
+
