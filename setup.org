@@ -17,6 +17,13 @@ tna with C-c C-v t
     (set-face-foreground 'default "bisque"))
 #+END_SRC
 
+**** set font size
+
+
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'default nil :height 100)
+#+END_SRC
+
 *** cursor color
 
 #+BEGIN_SRC emacs-lisp
