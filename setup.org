@@ -689,3 +689,26 @@ setting it to t for now. should be set top 'first-error when the issues with xce
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.org/packages/") t)
 #+END_SRC
+
+* configuring org-roame
+** you need sqlite3 for it to work
+#+BEGIN_SRC emacs-lisp
+  (use-package sqlite3
+    :ensure t)
+#+END_SRC
+
+** setting up org-roam it self
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    (setq org-roam-db-location (expand-file-name "~/.emacs.d/org-roam.db"))
+    :custom
+    (org-roam-directory "~/.emacs.d/roam")
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
+#+END_SRC
