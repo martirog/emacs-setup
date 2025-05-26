@@ -676,3 +676,9 @@ as we are not able to use vc in emacs do to not encripting passwords disaable th
                 tramp-file-name-regexp))
 #+END_SRC
 
+* compilation
+** scroll output.
+setting it to t for now. should be set top 'first-error when the issues with xcelium compiles is handeled
+#+BEGIN_SRC emacs-lisp
+  (setq compilation-scroll-output t)
+#+END_SRC
