@@ -732,6 +732,7 @@ setting it to t for now. should be set top 'first-error when the issues with xce
     :init
     (setq org-roam-v2-ack t)
     (setq org-roam-db-location (expand-file-name "~/.emacs.d/org-roam.db"))
+    (setq org-roam-node-display-template "${title} ${tags}")
     (advice-add 'wrap-fido-mode-for-this-function :around #'org-roam-node-find)
     (advice-add 'wrap-fido-mode-for-this-function :around #'org-roam-node-insert)
     :custom
