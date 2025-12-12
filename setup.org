@@ -627,6 +627,11 @@ TODO figure out if it is needed to disable reenable ido
     (setq org-agenda-files `(,orgdir)))
 #+END_SRC
 
+** Org completion system
+#+BEGIN_SRC emacs-lisp
+  (setq org-completion-use-ido t)
+#+END_SRC
+
 ** org capture templates
 *** emacs backlog
     This is a test. so will need rename as there is more then one backlog
