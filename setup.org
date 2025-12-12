@@ -452,6 +452,29 @@ set the limit for emacs to ask if a large file shuld be opened
   (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 #+END_SRC
 
+* fido
+#+BEGIN_SRC emacs-lisp :tangle no
+  (require 'icomplete)
+  (fido-mode t)
+#+END_SRC
+
+** Wrapper function to start fido mode for some functions
+
+TODO figure out if it is needed to disable reenable ido
+#+BEGIN_SRC emacs-lisp
+  (defun wrap-fido-mode-for-this-function (orig-func &rest args)
+    "wrap any function to locally start fido-mode for this function"
+    ;;do we need check for ido-mode and disabling if active?
+    (message "setting fido mode")
+    (fido-mode t)
+    (message "fido mode %s" (fido-mode))
+    (apply orig-func args)
+    (fido-mode -1))
+    (message "removing fido mode")
+  ;; reenabling ido if active??
+#+END_SRC
+
+
 * erc
 
 #+BEGIN_SRC emacs-lisp
@@ -704,6 +727,8 @@ setting it to t for now. should be set top 'first-error when the issues with xce
     :init
     (setq org-roam-v2-ack t)
     (setq org-roam-db-location (expand-file-name "~/.emacs.d/org-roam.db"))
+    (advice-add 'wrap-fido-mode-for-this-function :around #'org-roam-node-find)
+    (advice-add 'wrap-fido-mode-for-this-function :around #'org-roam-node-insert)
     :custom
     (org-roam-directory "~/.emacs.d/roam")
     :bind (("C-c n l" . org-roam-buffer-toggle)
@@ -712,6 +737,13 @@ setting it to t for now. should be set top 'first-error when the issues with xce
     :config
     (org-roam-setup))
 #+END_SRC
+
+** use fido as compleation in find and inset
+#+BEGIN_SRC emacs-lisp
+  (advice-add 'wrap-fido-mode-for-this-function :around #'org-roam-node-find)
+  (advice-add 'wrap-fido-mode-for-this-function :around #'org-roam-node-insert)
+#+END_SRC
+
 
 ** Use Org-agenda with org-roam (not functionell at this time)
 Since org-agenda does not work to well with multipple files keeping a list of the org-roam files that has TODO's in it helps org-agenda speed up.
